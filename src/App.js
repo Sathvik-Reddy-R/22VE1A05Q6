@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import URLShortenerPage from './components/URLShortenerPage';
+import URLShortenerStatisticPage from './components/URLShotenerStatisticPage';
 
-function App() {
+const App = () => {
+  const [history, setHistory] = useState([]);
+
+  const addToHistory = (entry) => {
+    setHistory((prev) => [...prev, entry]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: '40px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>URL Shortener</h1>
+      <hr />
+      <URLShortenerPage onShorten={addToHistory} />
+      <URLShortenerStatisticPage history={history} />
     </div>
   );
-}
+};
 
 export default App;
