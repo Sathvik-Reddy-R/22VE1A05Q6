@@ -1,0 +1,57 @@
+1. Application Overview
+•	A React frontend app that:
+o	Accepts long URLs and converts them to short ones.
+o	Allows optional custom codes and expiry time.
+o	Displays history of generated short URLs.
+o	Stores data temporarily in browser localStorage.
+
+ 2. Main Components
+a) App.js
+•	Acts as the root component.
+•	Manages the global state for URL history.
+•	Loads and saves URL data from/to localStorage.
+•	Renders:
+o	URLShortenerPage (form for shortening)
+o	URLShortenerStatisticPage (history list)
+
+b) URLShortenerPage.jsx
+•	Contains input fields:
+o	Original URL
+o	Custom short code (optional)
+o	Expiry duration (in minutes)
+•	Handles:
+o	URL validation and formatting
+o	Code generation (if custom code is not provided)
+o	Building of short URL
+•	Triggers onShorten() to send new data to App.js.
+c) URLShortenerStatisticPage.jsx
+•	Receives history as a prop from App.js.
+•	Displays the list of shortened URLs (in a div-based layout).
+•	Each entry shows:
+o	Original URL (clickable)
+o	Short URL (clickable)
+o	Code used
+o	Expiry date and time
+
+3. State Management
+•	Uses React useState in:
+o	App.js: to store the full history.
+o	URLShortenerPage.jsx: to manage input values and errors.
+•	Uses useEffect in:
+o	App.js: to load history from localStorage on component mount.
+
+ 4. Data Flow Process
+1.	User inputs a long URL and submits the form.
+2.	URLShortenerPage:
+o	Validates the input.
+o	Generates or uses a code.
+o	Constructs a short URL.
+o	Calculates the expiry timestamp.
+o	Calls onShorten() with all data.
+3.	App.js:
+o	Receives the new entry.
+o	Updates the history state.
+o	Saves updated history to localStorage.
+4.	URLShortenerStatisticPage:
+o	Renders the updated list of URLs.
+
